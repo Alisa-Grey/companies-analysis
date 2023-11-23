@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
-import Select, { ActionMeta } from 'react-select';
+import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { CompaniesContext } from '../../pages/Main';
+import { CompaniesContext, ICompany } from '../../pages/Main';
 import { companiesData } from '../../data';
 import './style.sass';
 
@@ -10,9 +10,9 @@ const companies = companiesData.map(item => {return {value: item.id, label: item
 const Multiselect: FC = () => {
   const animatedComponents = makeAnimated();
 
-  const { selectedValues, setSelectedValues } = useContext(CompaniesContext);
+  const { setSelectedValues } = useContext(CompaniesContext);
 
-  const handleChange = (option: Option[], actionMeta: ActionMeta<Option>) => {
+  const handleChange = (option: ICompany[]) => {
     setSelectedValues(option);
   }
 
@@ -27,6 +27,8 @@ const Multiselect: FC = () => {
       components={animatedComponents}
       className="basic-multi-select"
       classNamePrefix="select"
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       onChange={handleChange}
     />
   )

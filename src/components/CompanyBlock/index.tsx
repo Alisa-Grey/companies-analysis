@@ -1,7 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { LineChart, Line, CartesianGrid, XAxis, Tooltip, YAxis, Legend } from 'recharts';
-import { companiesData } from '../../data';
 import { CompanyProps } from '../../store/types';
 
 interface CompanyBlockProps {
@@ -34,15 +33,15 @@ const CompanyBlock: FC<CompanyBlockProps> = ({item, property}) => {
     } else {
       setName('Чистая прибыль')
     }
-  })
+  }, [property])
 
 
   return (
-    <Block  id={item.id}>
+    <Block id={String(item.id)}>
       <Title>{item.name}</Title>
       {
         typeof property!== 'undefined' && property.length > 0 && (
-          <LineChart width={400} height={400} data={item[property]}>
+          <LineChart width={400} height={400} data={item[property as keyof typeof item] as unknown[]}>
             <Line type="monotone" dataKey="value" stroke="#8884d8" name={name}/>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="year" />

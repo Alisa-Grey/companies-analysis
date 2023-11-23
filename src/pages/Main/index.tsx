@@ -1,4 +1,4 @@
-import { FC, createContext, useEffect, useState } from 'react';
+import{ FC, SetStateAction, createContext, useEffect, useState, Dispatch } from 'react';
 import Multiselect from '../../components/Multiselect';
 import './style.sass';
 import { Button } from '../../components/Button';
@@ -6,14 +6,24 @@ import CompanyBlock from '../../components/CompanyBlock';
 import { CompanyProps } from '../../store/types';
 import { companiesData } from '../../data';
 
-export const CompaniesContext = createContext({
+export interface ICompany {
+  value: number;
+  company: {[key: string]: string | number | []};
+}
+
+type CompanyContextType = {
+  selectedValues: ICompany[];
+  setSelectedValues: Dispatch<SetStateAction<ICompany[]>>;
+}
+
+export const CompaniesContext = createContext<CompanyContextType>({
 	selectedValues: [],
-	setSelectedValues: (val: {[string]: any}[]) => { },
+	setSelectedValues: () => {},
 });
 
 
 const Main: FC  = () => {
-  const [selectedValues, setSelectedValues] = useState<unknown[]>([]);
+  const [selectedValues, setSelectedValues] = useState<ICompany[]>([]);
 	const companiesContextValue = { selectedValues, setSelectedValues };
   const [ companiesList, setCompaniesList ] = useState<CompanyProps[]>([]);
   const [ func, setFunc ] = useState('');

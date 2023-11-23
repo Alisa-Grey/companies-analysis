@@ -54,7 +54,6 @@ const Login: FC = () => {
             navigate('/');
         }
     }
-
     return (
         <div className='container'>
             <form className="form" onSubmit={handleSubmit}>
