@@ -6,7 +6,6 @@ import './App.sass'
 
 const App: FC = () => {
   const render = (el: JSX.Element): JSX.Element => {
-    console.log('first', sessionStorage.getItem('isLogged')!==null && sessionStorage.getItem('isLogged')!.length > 0)
     if (sessionStorage.getItem('isLogged')!==null && sessionStorage.getItem('isLogged')!.length > 0) {
       return el;
     }

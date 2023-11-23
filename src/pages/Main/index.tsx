@@ -27,7 +27,6 @@ const Main: FC  = () => {
 	const companiesContextValue = { selectedValues, setSelectedValues };
   const [ companiesList, setCompaniesList ] = useState<CompanyProps[]>([]);
   const [ func, setFunc ] = useState('');
-  console.log('func', func)
 
   useEffect(() => {
     const companies: CompanyProps[] = [];
